@@ -7,5 +7,8 @@
     "test": "test"
   },
   "author": "vincent",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "linebot": "^1.5.1"
+  }
 }
