@@ -1,0 +1,11 @@
+{
+  "name": "ghost",
+  "version": "1.0.0",
+  "description": "like a ghost",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "vincent",
+  "license": "MIT"
+}
