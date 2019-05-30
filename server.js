@@ -1,8 +1,17 @@
-const linebot = require('linebot');
+'use strict';
+
+// configuration files
 const config = require('./config');
-const PORT = 8080;
+const setting = require('./setting');
+
+const linebot = require('linebot');
+const Database = require('./db.js');
+
+Database.setup();
 
 const bot = linebot(config);
+
+var heyhey = '';
 
 bot.on('message', (event) => {
 	// fetching user information
@@ -12,13 +21,16 @@ bot.on('message', (event) => {
 	}).catch((err)=> {
 		console.log('get profile error', err);
 	});
-	event.reply(event.message.text).then((data) => {
-		console.log(`auto reply ${event.message.text}`);
-	}).catch((err)=>{
-		console.log('message failed to send:', err);
-	});
+	if (event.message.text == '沙文') {
+		event.reply(heyhey).then((data) => {
+			console.log(`auto reply ${event.message.text}`);
+		}).catch((err)=>{
+			console.log('message failed to send:', err);
+		});
+	}
+	heyhey = event.message.text;
 });
 
-bot.listen('/linewebhook', PORT, () => {
-	console.log('bot server listen on port:', PORT);
+bot.listen('/linewebhook', setting.PORT, () => {
+	console.log('bot server listen on port:', setting.PORT);
 });

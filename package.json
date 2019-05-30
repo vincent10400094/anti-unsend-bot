@@ -9,6 +9,7 @@
   "author": "vincent",
   "license": "MIT",
   "dependencies": {
-    "linebot": "^1.5.1"
+    "linebot": "^1.5.1",
+    "mongoose": "^5.5.11"
   }
 }
