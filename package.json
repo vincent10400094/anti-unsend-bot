@@ -4,7 +4,8 @@
   "description": "like a ghost",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+	"start": "node server.js"
   },
   "author": "vincent",
   "license": "MIT",

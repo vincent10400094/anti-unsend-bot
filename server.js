@@ -1,7 +1,7 @@
 'use strict';
 
 // configuration files
-const config = require('./config');
+const config = require('./bot_config');
 const setting = require('./setting');
 
 const linebot = require('linebot');
