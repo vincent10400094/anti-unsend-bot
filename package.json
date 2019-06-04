@@ -5,11 +5,12 @@
   "main": "server.js",
   "scripts": {
     "test": "test",
-	"start": "node server.js"
+    "start": "node server.js"
   },
   "author": "vincent",
   "license": "MIT",
   "dependencies": {
+    "config": "^3.1.0",
     "linebot": "^1.5.1",
     "mongoose": "^5.5.11"
   }

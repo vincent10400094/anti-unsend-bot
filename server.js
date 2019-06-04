@@ -6,8 +6,9 @@ const setting = require('./setting');
 
 const linebot = require('linebot');
 const Database = require('./db.js');
+const PORT = process.env.PORT || setting.PORT;
 
-Database.setup();
+// Database.setup();
 
 const bot = linebot(config);
 
@@ -31,6 +32,6 @@ bot.on('message', (event) => {
 	heyhey = event.message.text;
 });
 
-bot.listen('/linewebhook', setting.PORT, () => {
-	console.log('bot server listen on port:', setting.PORT);
+bot.listen('/linewebhook', PORT, () => {
+	console.log('bot server listen on port:', PORT);
 });
