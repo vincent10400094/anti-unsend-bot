@@ -29,7 +29,9 @@ bot.on('message', (event) => {
 			console.log('message failed to send:', err);
 		});
 	}
-	heyhey = event.message.text;
+	if (event.message.text != '沙文' && event.message.text.length > 4) {
+		heyhey = event.message.text;
+	}
 });
 
 bot.listen('/linewebhook', PORT, () => {
