@@ -22,14 +22,14 @@ bot.on('message', (event) => {
 	}).catch((err)=> {
 		console.log('get profile error', err);
 	});
-	if (event.message.text == '沙文') {
+	if (event.message.text === '沙文') {
 		event.reply(heyhey).then((data) => {
 			console.log(`auto reply ${event.message.text}`);
 		}).catch((err)=>{
 			console.log('message failed to send:', err);
 		});
 	}
-	if (event.message.text != '沙文' && event.message.text.length > 4) {
+	if (event.message.text && event.message.text !== '沙文' && event.message.text.length>4) {
 		heyhey = event.message.text;
 	}
 });
