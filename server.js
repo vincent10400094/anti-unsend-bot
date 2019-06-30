@@ -1,8 +1,23 @@
 const config = require('config');
 
 const linebotHelper = require('./utils/linebotHelper');
-const PORT = process.env.PORT || config.get('project.webhook.PORT');
+const services = require('./services');
 
-linebotHelper.listen('/linewebhook', PORT, () => {
-	console.info(`====== [WEBHOOK] line webhook server listening on port ${PORT} ======`);
+const webhookPORT = process.env.PORT || config.get('project.webhook.PORT');
+
+linebotHelper.listen('/linewebhook', webhookPORT, () => {
+	console.info(`====== [WEBHOOK] line webhook server listening on port ${webhookPORT} ======`);
+});
+
+linebotHelper.on('message', async (event) => {
+	console.log(event);
+	if (event.message.text === 'man') {
+		services.getManual(event);
+		return;
+	}
+	if (event.message.text === config.get('ghost.keyword')) {
+		services.lastMessage.getLastMessage(event);
+		return;
+	}
+	services.lastMessage.update(event);
 });
