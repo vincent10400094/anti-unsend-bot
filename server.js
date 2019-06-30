@@ -1,39 +1,8 @@
-'use strict';
+const config = require('config');
 
-// configuration files
-const config = require('./bot_config');
-const setting = require('./setting');
+const linebotHelper = require('./utils/linebotHelper');
+const PORT = process.env.PORT || config.get('project.webhook.PORT');
 
-const linebot = require('linebot');
-const Database = require('./db.js');
-const PORT = process.env.PORT || setting.PORT;
-
-// Database.setup();
-
-const bot = linebot(config);
-
-var heyhey = '';
-
-bot.on('message', (event) => {
-	// fetching user information
-	event.source.profile().then((profile)=> {
-		// logging
-		console.log(`incomming message '${event.message.text}' from ${profile.displayName}`);
-	}).catch((err)=> {
-		console.log('get profile error', err);
-	});
-	if (event.message.text === '沙文') {
-		event.reply(heyhey).then((data) => {
-			console.log(`auto reply ${event.message.text}`);
-		}).catch((err)=>{
-			console.log('message failed to send:', err);
-		});
-	}
-	if (event.message.text && event.message.text !== '沙文' && event.message.text.length>4) {
-		heyhey = event.message.text;
-	}
-});
-
-bot.listen('/linewebhook', PORT, () => {
-	console.log('bot server listen on port:', PORT);
+linebotHelper.listen('/linewebhook', PORT, () => {
+	console.info(`====== [WEBHOOK] line webhook server listening on port ${PORT} ======`);
 });
