@@ -2,10 +2,10 @@
   "name": "ghost",
   "version": "1.0.0",
   "description": "like a ghost",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "test",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "author": "vincent",
   "license": "MIT",
