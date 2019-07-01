@@ -11,7 +11,11 @@ module.exports.updateMessages = (data, member) => {
 };
 
 module.exports.getMessages = async (data, member) => {
-	let reply = records.get(data.source.groupId).get(member) || 'Member does not exist or last messages not recorded';
+	try {
+		var reply = records.get(data.source.groupId).get(member) || 'Member does not exist or last messages not recorded';
+	} catch (error) {
+		var reply = 'Member does not exist or last messages not recorded';
+	}
 	await lineMessageSender(data, reply);
 	return;
 };

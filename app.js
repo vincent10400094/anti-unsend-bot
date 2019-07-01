@@ -11,8 +11,8 @@ linebotHelper.listen('/linewebhook', webhookPORT, () => {
 	console.info(`====== [WEBHOOK] line webhook server listening on port ${webhookPORT} ======`);
 });
 
-const gettingMember = new RegExp(keyword+' +[^ \n]+');
-const getMemberName = /(?<=沙文\s+)[^ \n]+/;
+const gettingMember = new RegExp(`${keyword} +@[^ \n]+`);
+const getMemberName = new RegExp(`(?<=${keyword} +@)[^ \n]+`);
 
 linebotHelper.on('message', async (event) => {
 	var profile = await memberProfileHelper(event);
@@ -27,8 +27,9 @@ linebotHelper.on('message', async (event) => {
 			return;
 		}
 		var matchArray = event.message.text.match(gettingMember);
-		if (matchArray && matchArray[0] == event.message.text) {
+		if (matchArray) {
 			var member = event.message.text.match(getMemberName)[0];
+			console.log(`get member ${member}'s last messages`);
 			services.getMemberLastMessages.getMessages(event, member);
 			return;
 		}
