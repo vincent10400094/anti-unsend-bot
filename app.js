@@ -11,7 +11,7 @@ const webhookPORT = process.env.PORT || config.get('project.webhook.PORT');
 const frontEndPORT = process.env.PORT || config.get('project.frontEnd.PORT');
 const keyword = config.get('ghost.keyword');
 
-setInterval(autoSaver.save, config.get('ghost.autoSaveInterval'));
+// setInterval(autoSaver.save, config.get('ghost.autoSaveInterval'));
 
 linebotHelper.listen('/linewebhook', webhookPORT, async () => {
 	console.info(`====== [WEBHOOK] line webhook server listening on port ${webhookPORT} ======`);
