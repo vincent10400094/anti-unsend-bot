@@ -27,6 +27,9 @@ linebotHelper.on('message', async (event) => {
 			services.getMemberLastMessages.getMessages(event, 'lastMessage');
 			return;
 		}
+		if (event.message.text === 'see') {
+			console.log(JSON.stringify(services.getMemberLastMessages.records));
+		}
 		var matchArray = event.message.text.match(gettingMember);
 		if (matchArray) {
 			var member = event.message.text.match(getMemberName)[0];
