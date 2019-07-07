@@ -18,7 +18,7 @@ linebotHelper.listen('/linewebhook', webhookPORT, async () => {
 	let data = await autoSaver.retrieve() || {};
 	services.getMemberLastMessages.retrieveRecords(data);	
 });
-services.frontEnd.listen(frontEndPORT);
+// services.frontEnd.listen(frontEndPORT);
 
 const gettingMember = new RegExp(`${keyword} +@[^ \n]+`);
 const getMemberName = new RegExp(`(?<=${keyword} +@)[^ \n]+`);
