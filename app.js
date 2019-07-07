@@ -2,6 +2,7 @@ const config = require('config');
 
 const linebotHelper = require('./utils/linebotHelper');
 const memberProfileHelper = require('./utils/memberProfileHelper');
+const logHelper = require('./utils/logHelper');
 const services = require('./services');
 
 const webhookPORT = process.env.PORT || config.get('project.webhook.PORT');
@@ -16,7 +17,7 @@ const getMemberName = new RegExp(`(?<=${keyword} +@)[^ \n]+`);
 
 linebotHelper.on('message', async (event) => {
 	var profile = await memberProfileHelper(event);
-	console.log(`incoming message '${event.message.text}' from ${profile.displayName}`);
+	logHelper(event, profile);
 	if (event.source.type === 'group' && event.message.type === 'text') {
 		if (event.message.text === 'man') {
 			services.getManual(event);

@@ -1,12 +1,24 @@
 const lineMessageSender = require('../utils/lineMessageSender');
+const config = require('config');
 var records = new Map();
 
 module.exports.updateMessages = (data, member) => {
-	if (!records.get(data.source.groupId)) {
-		records.set(data.source.groupId, new Map());
+	let group = records.get(data.source.groupId);
+	if (!group) {
+		group = new Map();
+		records.set(data.source.groupId, group);
 	}
-	records.get(data.source.groupId).set(member, data.message.text);
-	records.get(data.source.groupId).set('lastMessage', data.message.text);
+	let messages = group.get(member);
+	if (messages) {
+		messages.push(data.message.text);
+		if (messages.length > config.get('ghost.limit'))
+			messages.shift();
+	} else {
+		let messages = new Array();
+		messages.push(data.message.text);
+		group.set(member, messages);
+	}
+	group.set('lastMessage', data.message.text);
 	return;
 };
 

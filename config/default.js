@@ -10,6 +10,7 @@ module.exports = {
 		channelAccessToken: '***REMOVED***'
 	},
 	ghost: {
-		keyword: '沙文'
+		keyword: '沙文',
+		limit: 5
 	}
 };

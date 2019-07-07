@@ -1,8 +1,9 @@
+const colors = require('colors');
+
 module.exports = async (data) => {
 	try {
-		let profile = await data.source.profile();
-		return profile;
+		return await data.source.profile();
 	} catch (error) {
-		console.log('[getMemberProfile] error getting member profile', error);
+		console.log(colors.red('[Profile]'), 'error getting member profile', error);
 	}
 };

@@ -1,10 +1,11 @@
 const linebotHelper = require('./linebotHelper');
+const colors = require('colors');
 
 module.exports = async (data, message) => {
 	try {
 		await linebotHelper.reply(data.replyToken, message);
-		console.log(`[lineMessageSender] message '${message}' sent successfully`);
+		console.log(colors.yellow('[reply]'), `auto reply '${message}'`);
 	} catch (error) {
-		console.error('[lineMessageSender] Fail to send message:', error);
+		console.error(colors.red('[reply]'), 'Fail to send message:', error);
 	}
 }
