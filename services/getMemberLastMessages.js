@@ -1,6 +1,7 @@
 const lineMessageSender = require('../utils/lineMessageSender');
 const config = require('config');
-var records = {};
+
+records = {};
 
 module.exports.updateMessages = (data, member) => {
 	let group = records[data.source.groupId];
@@ -32,4 +33,11 @@ module.exports.getMessages = async (data, member) => {
 	return;
 };
 
-module.exports.records = records;
+module.exports.retrieveRecords = (data) => {
+	records = data;
+}
+
+module.exports.getRecords = () => {
+	return records;
+};
+

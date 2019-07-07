@@ -1,15 +1,21 @@
 const config = require('config');
+const colors = require('colors');
 
 const linebotHelper = require('./utils/linebotHelper');
 const memberProfileHelper = require('./utils/memberProfileHelper');
 const logHelper = require('./utils/logHelper');
+const autoSaver = require('./utils/autoSaver');
 const services = require('./services');
 
 const webhookPORT = process.env.PORT || config.get('project.webhook.PORT');
 const keyword = config.get('ghost.keyword');
 
-linebotHelper.listen('/linewebhook', webhookPORT, () => {
+setInterval(autoSaver.save, config.get('ghost.autoSaveInterval'));
+
+linebotHelper.listen('/linewebhook', webhookPORT, async () => {
 	console.info(`====== [WEBHOOK] line webhook server listening on port ${webhookPORT} ======`);
+	let data = await autoSaver.retrieve() || {};
+	services.getMemberLastMessages.retrieveRecords(data);	
 });
 
 const gettingMember = new RegExp(`${keyword} +@[^ \n]+`);
@@ -27,13 +33,10 @@ linebotHelper.on('message', async (event) => {
 			services.getMemberLastMessages.getMessages(event, 'lastMessage');
 			return;
 		}
-		if (event.message.text === 'see') {
-			console.log(JSON.stringify(services.getMemberLastMessages.records));
-		}
 		var matchArray = event.message.text.match(gettingMember);
 		if (matchArray) {
 			var member = event.message.text.match(getMemberName)[0];
-			console.log(`get member ${member}'s last messages`);
+			console.log(colors.magenta('[ghost]'), `get member ${member}'s last messages`);
 			services.getMemberLastMessages.getMessages(event, member);
 			return;
 		}
