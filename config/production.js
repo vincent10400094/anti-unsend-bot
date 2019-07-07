@@ -2,6 +2,9 @@ module.exports = {
 	project: {
 		webhook: {
 			PORT: 8080
+		},
+		frontEnd: {
+			PORT: 3000
 		}
 	},
 	line: {

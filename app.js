@@ -8,6 +8,7 @@ const autoSaver = require('./utils/autoSaver');
 const services = require('./services');
 
 const webhookPORT = process.env.PORT || config.get('project.webhook.PORT');
+const frontEndPORT = process.env.PORT || config.get('project.frontEnd.PORT');
 const keyword = config.get('ghost.keyword');
 
 setInterval(autoSaver.save, config.get('ghost.autoSaveInterval'));
@@ -17,6 +18,7 @@ linebotHelper.listen('/linewebhook', webhookPORT, async () => {
 	let data = await autoSaver.retrieve() || {};
 	services.getMemberLastMessages.retrieveRecords(data);	
 });
+services.frontEnd.listen(frontEndPORT);
 
 const gettingMember = new RegExp(`${keyword} +@[^ \n]+`);
 const getMemberName = new RegExp(`(?<=${keyword} +@)[^ \n]+`);
