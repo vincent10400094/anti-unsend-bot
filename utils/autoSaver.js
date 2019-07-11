@@ -25,6 +25,7 @@ module.exports.save = async () => {
 	}
 	try {
 		await fs.writeFile(filePath, data);
+		console.log(colors.grey('[auto saving]'), `records saved to ${filePath}`);
 	} catch (error) {
 		console.error(colors.red('[auto saving]'), error);
 	}
