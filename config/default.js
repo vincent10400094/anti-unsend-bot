@@ -2,7 +2,8 @@ module.exports = {
 	project: {
 		webhook: {
 			PORT: 8080
-		}
+		},
+		password: 'heyheyhey'
 	},
 	line: {
 		channelId: '***REMOVED***',
@@ -14,8 +15,6 @@ module.exports = {
 		limit: 5,
 		autoSave: true,
 		autoSaveInterval: 1000*60,	// 1 minute
-		path: 'records.json',
-		autoSaveUrl: 'http://linux5.csie.ntu.edu.tw:8787',
-		encoding: 'utf-8'
+		autoSaveUrl: 'http://linux5.csie.ntu.edu.tw:8787'
 	}
 };

@@ -1,23 +1,30 @@
 const fs = require('fs').promises;
 const colors = require('colors');
 const config = require('config');
-const path = require('path');
 const fetch = require('node-fetch');
+const path = require('path');
+const encryptionHelper = require('./encryptionHelper');
 
-var getRecords = require('../services/getMemberLastMessages').getRecords;
-var appDir = path.dirname(require.main.filename);
-const filePath = path.join(appDir, config.get('ghost.path'));
-const encoding = config.get('ghost.encoding');
+const getRecords = require('../services/getMemberLastMessages').getRecords;
 const url = config.get('ghost.autoSaveUrl');
+
+const appDir = path.dirname(require.main.filename);
+const filePath = path.join(appDir, 'records');
 
 module.exports.save = async () => {
 	let data = JSON.stringify(getRecords());
+	let encrypted = encryptionHelper.encrypt(data);
 	try {
 		await fetch(url, {
 			method: 'POST',
-			body: data
+			body: encrypted
 		});
 		console.log(colors.grey('[auto saving]'), `records saved to ${url}`);
+	} catch (error) {
+		console.error(colors.red('[auto saving]'), error);
+	}
+	try {
+		await fs.writeFile(filePath, data);
 	} catch (error) {
 		console.error(colors.red('[auto saving]'), error);
 	}
@@ -26,9 +33,10 @@ module.exports.save = async () => {
 module.exports.retrieve = async () => {
 	try {
 		let response = await fetch(url);
-		let data = await response.json();
+		let encrypted = await response.text();
+		let data = encryptionHelper.decrypt(encrypted);
 		console.log(colors.white('[retrive data]'), 'success');
-		return data;
+		return JSON.parse(data);
 	} catch (error) {
 		console.error(colors.red('[retrieve data]'), error);
 		return {};
