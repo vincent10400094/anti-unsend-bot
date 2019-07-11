@@ -14,7 +14,7 @@ module.exports = {
 		keyword: '沙文',
 		limit: 5,
 		autoSave: true,
-		autoSaveInterval: 1000*60*5,	// 5 minutes
+		autoSaveInterval: 1000*60*1,	// 5 minutes
 		autoSaveUrl: 'http://linux5.csie.ntu.edu.tw:8787'
 	}
 };

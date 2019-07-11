@@ -2,7 +2,6 @@ const colors = require('colors');
 const config = require('config');
 const fetch = require('node-fetch');
 const encryptionHelper = require('./encryptionHelper');
-
 const getRecords = require('../services/getMemberLastMessages').getRecords;
 const url = config.get('ghost.autoSaveUrl');
 
