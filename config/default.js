@@ -15,6 +15,7 @@ module.exports = {
 	ghost: {
 		keyword: '沙文',
 		limit: 5,
+		autoSave: true,
 		autoSaveInterval: 1000*60,	// 1 minute
 		path: 'records.json',
 		encoding: 'utf-8'
