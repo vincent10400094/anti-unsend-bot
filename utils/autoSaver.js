@@ -1,15 +1,10 @@
-const fs = require('fs').promises;
 const colors = require('colors');
 const config = require('config');
 const fetch = require('node-fetch');
-const path = require('path');
 const encryptionHelper = require('./encryptionHelper');
 
 const getRecords = require('../services/getMemberLastMessages').getRecords;
 const url = config.get('ghost.autoSaveUrl');
-
-const appDir = path.dirname(require.main.filename);
-const filePath = path.join(appDir, 'records');
 
 module.exports.save = async () => {
 	let data = JSON.stringify(getRecords());
@@ -20,12 +15,6 @@ module.exports.save = async () => {
 			body: encrypted
 		});
 		console.log(colors.grey('[auto saving]'), `records saved to ${url}`);
-	} catch (error) {
-		console.error(colors.red('[auto saving]'), error);
-	}
-	try {
-		await fs.writeFile(filePath, data);
-		console.log(colors.grey('[auto saving]'), `records saved to ${filePath}`);
 	} catch (error) {
 		console.error(colors.red('[auto saving]'), error);
 	}

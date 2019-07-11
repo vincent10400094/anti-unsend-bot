@@ -3,7 +3,7 @@ module.exports = {
 		webhook: {
 			PORT: 8080
 		},
-		password: 'heyheyhey'
+		password: '***REMOVED***'
 	},
 	line: {
 		channelId: '***REMOVED***',
