@@ -8,7 +8,6 @@ const autoSaver = require('./utils/autoSaver');
 const services = require('./services');
 
 const webhookPORT = process.env.PORT || config.get('project.webhook.PORT');
-const frontEndPORT = process.env.PORT || config.get('project.frontEnd.PORT');
 const keyword = config.get('ghost.keyword');
 
 if (config.get('ghost.autoSave')) {

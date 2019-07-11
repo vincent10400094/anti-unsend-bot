@@ -2,9 +2,6 @@ module.exports = {
 	project: {
 		webhook: {
 			PORT: 8080
-		},
-		frontEnd: {
-			PORT: 3000
 		}
 	},
 	line: {
@@ -18,6 +15,7 @@ module.exports = {
 		autoSave: true,
 		autoSaveInterval: 1000*60,	// 1 minute
 		path: 'records.json',
+		autoSaveUrl: 'http://linux5.csie.ntu.edu.tw:8787',
 		encoding: 'utf-8'
 	}
 };
