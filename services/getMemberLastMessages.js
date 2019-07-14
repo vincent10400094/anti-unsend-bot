@@ -10,10 +10,12 @@ module.exports.updateMessages = (data, member) => {
 		records[data.source.groupId] = group;
 	}
 	let messages = group[member];
-	if (messages && data.message.text != messages[messages.length-1]) {
-		messages.push(data.message.text);
-		if (messages.length > config.get('ghost.limit'))
-			messages.shift();
+	if (messages) {
+		if (data.message.text != messages[messages.length-1]) {
+			messages.push(data.message.text);
+			if (messages.length > config.get('ghost.limit'))
+				messages.shift();
+		}
 	} else {
 		let messages = new Array();
 		messages.push(data.message.text);
