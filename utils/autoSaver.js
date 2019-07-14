@@ -8,8 +8,10 @@ const url = config.get('ghost.autoSaveUrl');
 module.exports.save = async () => {
 	let data = JSON.stringify(getRecords());
 	let encrypted = encryptionHelper.encrypt(data);
+	let hash = encryptionHelper.getHash(encrypted);
 	try {
-		await fetch(url, {
+		let fullUrl = url+`?token=${hash.substr(0, 15)}`;
+		let response = await fetch(fullUrl, {
 			method: 'POST',
 			body: encrypted
 		});

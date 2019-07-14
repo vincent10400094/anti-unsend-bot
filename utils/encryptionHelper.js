@@ -25,3 +25,9 @@ module.exports.decrypt = (encrypted) => {
 	console.log(`[decryption] time elapsed: ${end-start}ms`);
 	return decrypted;
 };
+
+module.exports.getHash = (data) => {
+	let hash = crypto.createHash('sha256');
+	hash.update(data);
+	return hash.digest('hex');
+}
