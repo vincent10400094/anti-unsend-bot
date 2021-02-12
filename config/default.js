@@ -3,18 +3,18 @@ module.exports = {
 		webhook: {
 			PORT: 8080
 		},
-		password: '***REMOVED***'
+		password: '<Your password>'
 	},
 	line: {
-		channelId: '***REMOVED***',
-		channelSecret: '***REMOVED***',
-		channelAccessToken: '***REMOVED***'
+		channelId: '<Your channel ID>',
+		channelSecret: '<Your channel secret>',
+		channelAccessToken: '<Your channel access token>'
 	},
 	ghost: {
 		keyword: '沙文',
 		limit: 5,
 		autoSave: true,
-		autoSaveInterval: 1000*10,	// 1 minute
+		autoSaveInterval: 1000 * 10,	// 1 minute
 		autoSaveUrl: 'http://linux5.csie.ntu.edu.tw:8787'
 	}
 };
